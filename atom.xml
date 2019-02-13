@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>hffdmnの博客</title>
+  
+  <subtitle>记录学习的技能和遇到的问题</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://zhangxuezhi.com/"/>
+  <updated>2018-07-07T09:38:25.357Z</updated>
+  <id>http://zhangxuezhi.com/</id>
+  
+  <author>
+    <name>hffdmn</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CENTOS6.4 安装 GMIME</title>
+    <link href="http://zhangxuezhi.com/2018/07/07/CENTOS6-4-%E5%AE%89%E8%A3%85-GMIME/"/>
+    <id>http://zhangxuezhi.com/2018/07/07/CENTOS6-4-安装-GMIME/</id>
+    <published>2018-07-07T09:29:24.000Z</published>
+    <updated>2018-07-07T09:38:25.357Z</updated>
+    
+    <content type="html"><![CDATA[<hr><a id="more"></a><p>官方文档 <a href="http://spruce.sourceforge.net/gmime/doc/gmime-building.html" target="_blank" rel="noopener">http://spruce.sourceforge.net/gmime/doc/gmime-building.html</a></p><blockquote><ul><li>安装 glib库 </li><li>安装 zlib-devel</li><li>安装 gmime</li><li>安装 pkg-config 和 GUN </li><li>环境配置</li><li>测试</li><li>编译</li></ul></blockquote><h2 id="安装glib库"><a href="#安装glib库" class="headerlink" title="安装glib库"></a>安装glib库</h2><pre><code>yum install glib*   </code></pre><h2 id="安装zlib-devel"><a href="#安装zlib-devel" class="headerlink" title="安装zlib-devel"></a>安装zlib-devel</h2><pre><code>yum install zlib-devel</code></pre><h2 id="gmime下载"><a href="#gmime下载" class="headerlink" title="gmime下载"></a>gmime下载</h2><p>可以通过命令以下命令下载需要的版本。<br>  <code>wget --no-check-certificate https://download.gnome.org/sources/gmime/</code> </p><p>   注意： gmime2.2x 的需要Glib version &gt;= 2.6.0；<br>   gmime2.4x的需要Glib version &gt;= 2.12.0；<br>   gmime2.6x的需要Glib version &gt;= 2.18.0。<br>   很多教程为了安装新版本的gmime选择升级Glib,但glib库升级非常麻烦，还可能会产生新老版本的冲突，所以只要选择适合自己的版本就行。<br>   我的是 <code>wget --no-check-certificate https://download.gnome.org/sources/gmime/2.4/gmime-2.4.0.tar.gz</code></p><pre><code>解压：tar -xvzf gmime-2.4.0.tar.gz进入目录：cd gmime-2.4.0 安装：./configure --prefix==/usrmakemake install如果安装到根目录下需要输入ldconfig</code></pre><h2 id="安装pkg-config和GUN-make"><a href="#安装pkg-config和GUN-make" class="headerlink" title="安装pkg-config和GUN make"></a>安装pkg-config和GUN make</h2><p>   centos6.4是系统自带的这两个。<br>   安装方法：</p><pre><code>yum install GUN make    yum install pkg-config</code></pre><p>   检测是否安装的方法就是直接输入pkg-config，如果说没有该命令，就表示未安装。</p><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><pre><code>命令行输入  CPPFLAGS=&quot;-I/usr/include&quot;  LDFLAGS=&quot;-L/usr/lib&quot;  PKG_CONFIG_PATH=&quot;/usr/lib/pkgconfig&quot;  export CPPFLAGS LDFLAGS PKG_CONFIG_PATH  LD_LIBRARY_PATH=&quot;/usr/lib&quot;  PATH=&quot;/usr/bin:$PATH&quot;  export LD_LIBRARY_PATH PATH           </code></pre><h2 id="测试使用gmime库解析邮件"><a href="#测试使用gmime库解析邮件" class="headerlink" title="测试使用gmime库解析邮件"></a>测试使用gmime库解析邮件</h2><pre><code>cd gmime-2.4.0/examples/执行  ./imap-example ../tests/test1.eml如果产生解析出的test1.eml文件内容表示成功安装</code></pre><h2 id="编译-（必须在5步之后的终端进行）"><a href="#编译-（必须在5步之后的终端进行）" class="headerlink" title="编译 （必须在5步之后的终端进行）"></a>编译 （必须在5步之后的终端进行）</h2><p>   执行 <code>pkg-config --cflags gmime-2.4</code> 可以看到</p><pre><code>-pthread -I/usr/include/gmime-2.4 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include </code></pre><p>   执行 <code>pkg-config --libs gmime-2.4</code> 可以看到</p><pre><code>-pthread -lgmime-2.4 -lz -lnsl -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0</code></pre><p>   所以编译命令为  cc <code>pkg-config --cflags --libs gmime-2.4</code> hello.c -o hello<br>   执行命令为 <code>./hello &#39;/1.eml&#39;</code> </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

@@ -7,18 +7,16 @@
   
   
   
-  <title>Archives: 2018 | hffdmnの博客</title>
+  <title>CENTOS6.4 安装 GMIME | hffdmnの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="做自己爱做的事，爱自己在做的事！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="hffdmnの博客">
-<meta property="og:url" content="http://zhangxuezhi.com/archives/2018/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="CENTOS6.4 安装 GMIME">
+<meta property="og:url" content="http://zhangxuezhi.com/2018/07/07/CENTOS6-4-安装-GMIME/index.html">
 <meta property="og:site_name" content="hffdmnの博客">
-<meta property="og:description" content="做自己爱做的事，爱自己在做的事！">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-07T09:38:25.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hffdmnの博客">
-<meta name="twitter:description" content="做自己爱做的事，爱自己在做的事！">
+<meta name="twitter:title" content="CENTOS6.4 安装 GMIME">
   
     <link rel="alternative" href="/atom.xml" title="hffdmnの博客" type="application/atom+xml">
   
@@ -43,8 +41,8 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
-          isArchive: true,
+          isPost: true,
+          isArchive: false,
           isTag: false,
           isCategory: false,
           open_in_new: false
@@ -225,52 +223,231 @@
         </header>
     </div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-CENTOS6-4-安装-GMIME" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a  href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a  href="/2018/07/07/CENTOS6-4-安装-GMIME/" class="archive-article-date">
-      <time datetime="2018-07-07T09:29:24.000Z" itemprop="datePublished">07-07</time>
+    <div class="article-meta">
+      <a  href="/2018/07/07/CENTOS6-4-安装-GMIME/" class="article-date">
+      <time datetime="2018-07-07T09:29:24.000Z" itemprop="datePublished">2018-07-07</time>
 </a>
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a  class="archive-article-title" href="/2018/07/07/CENTOS6-4-安装-GMIME/">CENTOS6.4 安装 GMIME</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CENTOS6.4 安装 GMIME
     </h1>
   
 
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 
-          
-        </div>
+        
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <hr>
+<a id="more"></a>
+<p>官方文档 <a href="http://spruce.sourceforge.net/gmime/doc/gmime-building.html" target="_blank" rel="noopener">http://spruce.sourceforge.net/gmime/doc/gmime-building.html</a></p>
+<blockquote>
+<ul>
+<li>安装 glib库 </li>
+<li>安装 zlib-devel</li>
+<li>安装 gmime</li>
+<li>安装 pkg-config 和 GUN </li>
+<li>环境配置</li>
+<li>测试</li>
+<li>编译</li>
+</ul>
+</blockquote>
+<h2 id="安装glib库"><a href="#安装glib库" class="headerlink" title="安装glib库"></a>安装glib库</h2><pre><code>yum install glib*   
+</code></pre><h2 id="安装zlib-devel"><a href="#安装zlib-devel" class="headerlink" title="安装zlib-devel"></a>安装zlib-devel</h2><pre><code>yum install zlib-devel
+</code></pre><h2 id="gmime下载"><a href="#gmime下载" class="headerlink" title="gmime下载"></a>gmime下载</h2><p>可以通过命令以下命令下载需要的版本。<br>  <code>wget --no-check-certificate https://download.gnome.org/sources/gmime/</code> </p>
+<p>   注意： gmime2.2x 的需要Glib version &gt;= 2.6.0；<br>   gmime2.4x的需要Glib version &gt;= 2.12.0；<br>   gmime2.6x的需要Glib version &gt;= 2.18.0。<br>   很多教程为了安装新版本的gmime选择升级Glib,但glib库升级非常麻烦，还可能会产生新老版本的冲突，所以只要选择适合自己的版本就行。<br>   我的是 <code>wget --no-check-certificate https://download.gnome.org/sources/gmime/2.4/gmime-2.4.0.tar.gz</code></p>
+<pre><code>解压：
+tar -xvzf gmime-2.4.0.tar.gz
+
+进入目录：
+cd gmime-2.4.0
+
+ 安装：
+./configure --prefix==/usr
+make
+make install
+如果安装到根目录下需要输入ldconfig
+</code></pre><h2 id="安装pkg-config和GUN-make"><a href="#安装pkg-config和GUN-make" class="headerlink" title="安装pkg-config和GUN make"></a>安装pkg-config和GUN make</h2><p>   centos6.4是系统自带的这两个。<br>   安装方法：</p>
+<pre><code>yum install GUN make    
+yum install pkg-config
+</code></pre><p>   检测是否安装的方法就是直接输入pkg-config，如果说没有该命令，就表示未安装。</p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><pre><code>命令行输入
+
+  CPPFLAGS=&quot;-I/usr/include&quot;
+  LDFLAGS=&quot;-L/usr/lib&quot;
+  PKG_CONFIG_PATH=&quot;/usr/lib/pkgconfig&quot;
+  export CPPFLAGS LDFLAGS PKG_CONFIG_PATH
+  LD_LIBRARY_PATH=&quot;/usr/lib&quot;
+  PATH=&quot;/usr/bin:$PATH&quot;
+  export LD_LIBRARY_PATH PATH           
+</code></pre><h2 id="测试使用gmime库解析邮件"><a href="#测试使用gmime库解析邮件" class="headerlink" title="测试使用gmime库解析邮件"></a>测试使用gmime库解析邮件</h2><pre><code>cd gmime-2.4.0/examples/
+执行  ./imap-example ../tests/test1.eml
+如果产生解析出的test1.eml文件内容表示成功安装
+</code></pre><h2 id="编译-（必须在5步之后的终端进行）"><a href="#编译-（必须在5步之后的终端进行）" class="headerlink" title="编译 （必须在5步之后的终端进行）"></a>编译 （必须在5步之后的终端进行）</h2><p>   执行 <code>pkg-config --cflags gmime-2.4</code> 可以看到</p>
+<pre><code>-pthread -I/usr/include/gmime-2.4 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include 
+</code></pre><p>   执行 <code>pkg-config --libs gmime-2.4</code> 可以看到</p>
+<pre><code>-pthread -lgmime-2.4 -lz -lnsl -lgobject-2.0 -lgthread-2.0 -lrt -lglib-2.0
+</code></pre><p>   所以编译命令为  cc <code>pkg-config --cflags --libs gmime-2.4</code> hello.c -o hello<br>   执行命令为 <code>./hello &#39;/1.eml&#39;</code> </p>
+
+      
+    </div>
+    
   </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2018/07/07/CENTOS6-4-安装-GMIME/">CENTOS6.4 安装 GMIME</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 hffdmn 的个人博客">hffdmn</a></p>
+        <p><span>发布时间:</span>2018年07月07日 - 17时29分</p>
+        <p><span>最后更新:</span>2018年07月07日 - 17时38分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/07/07/CENTOS6-4-安装-GMIME/" title="CENTOS6.4 安装 GMIME">http://zhangxuezhi.com/2018/07/07/CENTOS6-4-安装-GMIME/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zhangxuezhi.com/2018/07/07/CENTOS6-4-安装-GMIME/　　作者: hffdmn" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装glib库"><span class="toc-number">1.</span> <span class="toc-text">安装glib库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装zlib-devel"><span class="toc-number">2.</span> <span class="toc-text">安装zlib-devel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gmime下载"><span class="toc-number">3.</span> <span class="toc-text">gmime下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装pkg-config和GUN-make"><span class="toc-number">4.</span> <span class="toc-text">安装pkg-config和GUN make</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境配置"><span class="toc-number">5.</span> <span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试使用gmime库解析邮件"><span class="toc-number">6.</span> <span class="toc-text">测试使用gmime库解析邮件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-（必须在5步之后的终端进行）"><span class="toc-number">7.</span> <span class="toc-text">编译 （必须在5步之后的终端进行）</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
 
     
+        <section class="changyan" id="comments">
+  <!--<div id="uyan_frame"></div>-->
+  <div id="SOHUCS"></div>
+  <script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js"></script>
+  <script type="text/javascript">
+    window.changyan.api.config({
+      appid: 'xxxx',
+      conf: 'xxxxxxxxx'
+    });
+  </script>
+</section>
+    
 
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/07/CENTOS6-4-安装-GMIME/">CENTOS6.4 安装 GMIME</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
 
 </div>
       <footer id="footer">
@@ -362,18 +539,6 @@ ga('send', 'pageview');
         };
     })
 </script>
-
-    <button class="hide-labels">TAG 开关</button>
-    
-<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".article-info").toggle(200);
-            });
-        });
-    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
